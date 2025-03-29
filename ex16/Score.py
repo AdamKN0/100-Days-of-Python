@@ -13,8 +13,8 @@ class Score(Turtle):
 
     def update_score(self):
         self.clear()
-        self.goto(0, 260)  # Ensure the score is always at the top
-        self.write(f"Score: {self.score} High Score: {self.high_score}", align="center", font=("Arial", 24, "normal"))
+        self.goto(0, 260)
+        self.write(f"Score: {self.score} High Score: {self.read_high_score()}", align="center", font=("Arial", 24, "normal"))
 
     def reset(self):
         if self.score > self.high_score:
@@ -33,3 +33,14 @@ class Score(Turtle):
         self.write("Press 'C' to play again", align="center", font=("Arial", 16, "normal"))
         self.goto(0, -60)
         self.write("Press 'Q' to quit", align="center", font=("Arial", 16, "normal"))
+
+    def save_high_score(self):
+        with open("high_score.txt", "w") as file:
+            file.write(str(self.high_score))
+
+    def read_high_score(self):
+        try:
+            with open("high_score.txt", "r") as file:
+                return int(file.read())
+        except FileNotFoundError:
+            return 0

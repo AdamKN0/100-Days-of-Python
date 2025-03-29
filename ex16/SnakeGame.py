@@ -89,6 +89,7 @@ class SnakeGame:
     def end_game(self):
         self.score.game_over()
         self.game_is_on = False
+        self.score.save_high_score()
 
     def restart_game(self):
         self.score.reset()
